@@ -6,14 +6,14 @@ const mongoose = require("mongoose");
 dotenv.config();
 
 // connect
-mongoose.connect(
-  process.env.DB_CONNECT,
-  {
-    useUnifiedTopology: true,
-    useNewUrlParse: true,
-  },
-  () => console.log("DB connected")
-);
+mongoose.connect("mongodb://0.0.0.0:27017/product", {
+  useNewUrlParser: true
+});
+
+const conn = mongoose.connection;
+conn.on("open", function () {
+  console.log("connected...........");
+});
 
 app.listen(4000, () => {
   console.log("server is up and running on 4000");
