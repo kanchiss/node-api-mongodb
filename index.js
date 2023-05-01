@@ -10,10 +10,15 @@ mongoose.connect("mongodb://0.0.0.0:27017/product", {
   useNewUrlParser: true
 });
 
+app.use(express.json());
+
 const conn = mongoose.connection;
 conn.on("open", function () {
   console.log("connected...........");
 });
+
+const productRoute = require('./routers/product');
+app.use('/product', productRoute);
 
 app.listen(4000, () => {
   console.log("server is up and running on 4000");
