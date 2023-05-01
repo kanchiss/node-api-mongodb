@@ -14,6 +14,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+    try {
+      const product = await Product.findById(req.params.id);
+      res.status(200).json(product);
+      console.log("get by id request");
+    } catch (error) {
+      res.send("error : ", error);
+    }
+  });
+
 router.post("/", async (req, res) => {
   const newProduct = new Product({
     // title: "Redmi",
@@ -29,7 +39,7 @@ router.post("/", async (req, res) => {
   try {
     const p1 = await newProduct.save();
     res.status(200).json(p1);
-    console.log("get request");
+    console.log("post request");
   } catch (error) {
     res.status(404).send(error);
   }
