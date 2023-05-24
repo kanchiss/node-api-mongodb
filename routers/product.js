@@ -15,14 +15,14 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    try {
-      const product = await Product.findById(req.params.id);
-      res.status(200).json(product);
-      console.log("get by id request");
-    } catch (error) {
-      res.send("error : ", error);
-    }
-  });
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+    console.log("get by id request");
+  } catch (error) {
+    res.send("error : ", error);
+  }
+});
 
 router.post("/", async (req, res) => {
   const newProduct = new Product({
